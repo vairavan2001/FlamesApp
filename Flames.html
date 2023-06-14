@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Flames Calculator</title>
+        <style>
+            *{
+                font-family:Courier;
+                font-size: 25px;
+            }
+            label{
+                display:inline-block;
+                width:80px;
+                text-align: center;
+                vertical-align: middle;
+                font-weight: 50px;
+                font-style: bold;
+                color:brown;
+            }
+            input[type=text]{
+                width:250px;
+                height:50px;
+                border: 0 solid;
+                border-radius:5px;
+                background-color: transparent;
+                font-weight: 50px;
+                font-style: bold;
+                color:black;
+                text-align: left;
+                
+            }
+            input[type=button]{
+                width:300px;
+                height:50px;
+                border: 0 solid;
+                border-radius:5px;
+                background-color: green;
+                font-style: italic;
+                text-align: center;
+                font-size: 35px;
+                color:white
+            }
+            body{
+                background-image: url("https://media3.giphy.com/media/3o6gbeVN2ZPbG2COKA/giphy.gif");
+                background-size:cover;
+                background-repeat: no-repeat;
+                border: 5px solid;
+                margin:0;
+            }
+            p{
+                text-align: center;
+                padding:15px 0;
+                
+            }
+            form{
+                margin: 250px 450px;
+                background-color: white;
+                width:500px;
+                vertical-align: middle;
+                border-radius: 25px;
+                border:3px solid;
+            }
+            p:last-child{
+                padding-left:-10px
+            }
+            input[type=button]:hover{
+                color:black;
+                background-color:gainsboro;
+                
+            }
+            
+        </style>
+    </head>
+    <body>
+        <form>
+        <p><label for="name1">Guy </label><input type="text" id="name1" placeholder="Enter a name" required></p>
+        <p><label for="name2">Girl</label><input type="text" id="name2" placeholder="Enter a name" required></p>
+        <p><input type="button" value="CALCULATE" onclick="flames()"></p>
+        </form>
+        <script>
+            function flames(){
+            var name1=document.getElementById("name1").value;
+            var name2=document.getElementById("name2").value;
+            name1 =name1.toUpperCase();
+            name2= name2.toUpperCase();
+            if(name1!="" || name2!=""){
+            name1=name1.replace(" ","");
+            name2=name2.replace(" ","");
+            const n1=name1.split("");
+            const n2 =name2.split("");
+            var count=0;
+            for(var i=0;i<name1.length;i++){
+                for(var j=0;j<name2.length;j++){
+                    if(n1[i]==n2[j]){
+                        n1[i]='/';
+                        n2[j]='/';
+                        count++;
+                        break;
+                    }
+                }
+            }
+            var rem=(n1.length+n2.length)-(count*2);
+            const flames=['Friend','Love','Affection','Marriage','Enemy','Sister'];
+                var c=0;
+                var sum=0;
+            while(c<5){
+                for(var i =0;i<flames.length;i++){
+                    if(flames[i]!='/'){
+                        sum++;
+                    }
+                    if(sum==rem){
+                        flames[i]='/';
+                        c++;
+                        sum=0;
+                    }
+                }
+            }
+            for(var i=0;i<flames.length;i++){
+                if(flames[i]!='/'){
+                    document.writeln("<html>");
+                    document.writeln("<head>");
+                    document.writeln("<title>Flames Calculator</title>");
+                    document.writeln("<style> p{font-family:Courier; font-size: 25px; margin:250px 250px;background-color:white;height:150px;border:2px solid;border-radius:10px;padding:10px;width:1010px;text-align:center; height:300px} body{background-image:url('https://i.pinimg.com/originals/0c/e9/02/0ce90263bde405e21c544de46982006a.gif'); background-size:cover;margin:0;border:2px solid}span{color:red}span:hover{color:blue} img{width:200px;height:200px;border:2px solid ; border-radius:15px;margin-top:25px}</style>");
+                    document.writeln("</head>");
+                    document.writeln("<body>");
+                    document.writeln("<p>The relationship between "+"<b><i><span>"+name1+"</span></i></b>"+" and "+"<b><i><span>"+ name2+"</span></i></b>"+ " will end in "+flames[i]);
+                    switch(flames[i]){
+                        case "Friend" :
+                        document.writeln("<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnhzjT5_VXeiGYEYvDNZsY5HWZhVzlVdGQHw&usqp=CAU' alt='Friends'>");
+                        break;
+                        case "Love" :
+                        document.writeln("<img src='data:image/jpeg;base64,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' alt='Love'>");
+                        break;
+                        case "Affection" :
+                        document.writeln("<img src='https://images.pexels.com/photos/1534633/pexels-photo-1534633.jpeg?cs=srgb&dl=pexels-shukhrat-umarov-1534633.jpg&fm=jpg' alt='Affection'>");
+                        break;
+                        case "Marriage" :
+                        document.writeln("<img src='https://i.pinimg.com/550x/e0/20/f5/e020f56b06d4c8c88de36799bdd12452.jpg' alt='Marraige'>");
+                        break;
+                        case "Enemy" :
+                        document.writeln("<img src='https://media.istockphoto.com/id/155260166/photo/chess-two-rows-of-pawns-with-knight-challenge-centre.jpg?b=1&s=612x612&w=0&k=20&c=yr_hzsyu3cAeUVeaDt9aFY-uZuW13Cvl7ZxwqIQVNzU=' alt='Enemy'>");
+                        break;
+                        case "Sister" :
+                        document.writeln("<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3CLbNwjlHMdptsGOCI6RohVx1753Hl1FZBA&usqp=CAU' alt='Sister'>");
+                        break;
+                    }
+                    document.writeln("</p>");
+                    document.writeln("</body>");
+                    document.writeln("</html>");
+                }
+            }
+            }
+            else{
+            alert("*** Enter the name to calculate... ***");
+            }
+        }
+        
+        </script>
+    </body>
+</html>
